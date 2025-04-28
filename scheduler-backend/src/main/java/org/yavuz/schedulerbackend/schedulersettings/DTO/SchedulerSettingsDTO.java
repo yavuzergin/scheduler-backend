@@ -10,6 +10,10 @@ public class SchedulerSettingsDTO {
     private int startHour;
     private int endHour;
 
+    public SchedulerSettingsDTO(){
+
+    }
+
     public SchedulerSettingsDTO(SchedulerSettings schedulerSettings){
         this.id = schedulerSettings.getId();
         this.totalDurationMinutes = schedulerSettings.getTotalDurationMinutes();
