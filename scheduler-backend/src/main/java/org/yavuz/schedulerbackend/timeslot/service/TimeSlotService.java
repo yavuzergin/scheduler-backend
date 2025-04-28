@@ -8,6 +8,7 @@ import org.yavuz.schedulerbackend.timeslot.repository.TimeSlotRepository;
 
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,31 +25,44 @@ public class TimeSlotService {
     }
 
     public List<TimeSlotDTO> createTimeSlots() {
+        timeSlotRepository.deleteAll();
         List<TimeSlot> timeSlots = new ArrayList<>();
-        for(String day : days) {
-            LocalTime time = LocalTime.of(0, 0);
-            while (time.isBefore(LocalTime.of(23,59))) {
+        LocalTime startTime = LocalTime.of(0, 0);
+        LocalTime endTime = LocalTime.of(23, 59);
+        int startMinute = startTime.getHour() * 60 + startTime.getMinute(); // 0
+        int endMinute = endTime.getHour() * 60 + endTime.getMinute(); // 1439
+
+        for (String day : days) {
+            int currentMinute = startMinute;
+            while (currentMinute <= endMinute) {
+                LocalTime currentTime = LocalTime.of(currentMinute / 60, currentMinute % 60);
                 TimeSlot timeSlot = new TimeSlot();
                 timeSlot.setDay(day);
-                timeSlot.setStartTime(time.getHour() * 60 + time.getMinute());
-                timeSlot.setEndTime(time.plusMinutes(slotDurationMinutes).getHour() * 60 + time.plusMinutes(slotDurationMinutes).getMinute());
+                int startTimeValue = currentMinute;
+                timeSlot.setStartTime(startTimeValue);
+                int slotEndMinute = currentMinute + slotDurationMinutes;
+                if (slotEndMinute > endMinute) {
+                    slotEndMinute = endMinute;
+                }
+                LocalTime slotEndTime = LocalTime.of(slotEndMinute / 60, slotEndMinute % 60);
+                int endTimeValue = slotEndMinute;
+                timeSlot.setEndTime(endTimeValue);
                 timeSlot.setIsAvailable(true);
                 timeSlots.add(timeSlot);
-                time =  time.plusMinutes(slotDurationMinutes);
+                currentMinute += slotDurationMinutes;
             }
         }
         timeSlotRepository.saveAll(timeSlots);
         return timeSlots.stream().map(TimeSlotDTO::new).collect(Collectors.toList());
     }
 
-    public void updateTimeSlotAvailability (Long id, boolean isAvailable) {
+    public void updateTimeSlotAvailability(Long id, boolean isAvailable) {
         TimeSlot timeSlot = timeSlotRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(id + "id'sine ait zaman dilimi bulunamadı."));
-        timeSlot.setIsAvailable((isAvailable));
+        timeSlot.setIsAvailable(isAvailable);
         timeSlotRepository.save(timeSlot);
     }
-    public List <TimeSlotDTO> getTimeSlots() {
+
+    public List<TimeSlotDTO> getTimeSlots() {
         return timeSlotRepository.findAll().stream().map(TimeSlotDTO::new).collect(Collectors.toList());
-
     }
-
 }
