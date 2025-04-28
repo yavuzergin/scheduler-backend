@@ -28,7 +28,7 @@ public class DutyChunkService {
         DutyChunk dutyChunk = new DutyChunk();
         dutyChunk.setParentId(parentId);
         dutyChunk.setTimeSlotsId(timeSlotsId);
-        dutyChunk.setOrder(order);
+        dutyChunk.setChunkOrder(dutyChunk.getChunkOrder());
         DutyChunk saveDutyChunk = dutyChunkRepository.save(dutyChunk);
         return new DutyChunkDTO(saveDutyChunk);
     }

@@ -1,18 +1,11 @@
 package org.yavuz.schedulerbackend.duties.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.data.relational.core.mapping.Table;
+import lombok.*;
 
 @Entity
 @Table(name = "tasks")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Duty {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

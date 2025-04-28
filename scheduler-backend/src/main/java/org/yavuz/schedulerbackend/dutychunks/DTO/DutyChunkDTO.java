@@ -8,13 +8,13 @@ public class DutyChunkDTO {
     private Long id;
     private Long parentId;
     private Long timeSlotsId;
-    private int order;
+    private int chunkOrder;
 
     public DutyChunkDTO(DutyChunk dutyChunk){
         this.id = dutyChunk.getId();
         this.parentId = dutyChunk.getId();
         this.timeSlotsId = dutyChunk.getTimeSlotsId();
-        this.order = dutyChunk.getOrder();
+        this.chunkOrder = dutyChunk.getChunkOrder();
 
     }
 

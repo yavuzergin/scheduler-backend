@@ -15,6 +15,6 @@ public class DutyChunk {
     private Long parentId;
     @Column(name = "time_slots_id")
     private Long timeSlotsId;
-    @Column(name = "order")
-    private int order;
+    @Column(name = "chunk_order")
+    private int chunkOrder;
 }

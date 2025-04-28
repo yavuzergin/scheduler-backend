@@ -12,7 +12,6 @@ import org.yavuz.schedulerbackend.schedulersettings.service.SchedulerSettingsSer
 @RestController
 @RequestMapping("/settings")
 public class SchedulerSettingsController {
-    @Autowired
     private final SchedulerSettingsService schedulerSettingsService;
 
     public SchedulerSettingsController(SchedulerSettingsService schedulerSettingsService){

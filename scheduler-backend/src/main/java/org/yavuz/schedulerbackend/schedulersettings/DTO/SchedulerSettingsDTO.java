@@ -14,6 +14,6 @@ public class SchedulerSettingsDTO {
         this.id = schedulerSettings.getId();
         this.totalDurationMinutes = schedulerSettings.getTotalDurationMinutes();
         this.startHour = schedulerSettings.getStartHour();
-        this.endHour = schedulerSettings.getStartHour();
+        this.endHour = schedulerSettings.getEndHour();
     }
 }

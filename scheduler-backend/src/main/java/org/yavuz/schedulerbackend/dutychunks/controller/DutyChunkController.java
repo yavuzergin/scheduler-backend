@@ -15,7 +15,7 @@ public class DutyChunkController {
 
     @PostMapping("/assign-duty-chunk")
     public DutyChunkDTO assignDutyToTimeSlot(@RequestBody DutyChunkDTO dutyChunkDTO){
-        return dutyChunkService.assignDutyToTimeSlot(dutyChunkDTO.getParentId(), dutyChunkDTO.getTimeSlotsId(), dutyChunkDTO.getOrder());
+        return dutyChunkService.assignDutyToTimeSlot(dutyChunkDTO.getParentId(), dutyChunkDTO.getTimeSlotsId(), dutyChunkDTO.getChunkOrder());
     }
 
     @DeleteMapping("/delete/{id}")
