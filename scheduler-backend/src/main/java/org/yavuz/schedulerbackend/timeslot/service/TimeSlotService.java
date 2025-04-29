@@ -19,6 +19,9 @@ public class TimeSlotService {
     private static final String[] days = {
             "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"
     };
+    public int getSlotDurationMinutes() {
+        return slotDurationMinutes;
+    }
 
     public TimeSlotService(TimeSlotRepository timeSlotRepository) {
         this.timeSlotRepository = timeSlotRepository;
